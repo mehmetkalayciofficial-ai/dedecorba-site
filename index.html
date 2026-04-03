@@ -152,8 +152,9 @@
     }
     .deco-divider::before{
       content:'';position:absolute;inset:0;
-      background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');
-      background-size:300px;background-repeat:repeat;opacity:.18;
+      background-image:url('dedecorba-media/100.png');
+      background-size:auto 100%;background-repeat:repeat-x;
+      background-position:center;opacity:.3;
       animation:patternDrift 60s linear infinite;
     }
     .deco-divider::after{
@@ -347,11 +348,10 @@
 
 <!-- ========== HERO (Bordo arka plan) ========== -->
 <section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--claret-dark);">
-  <canvas id="beamsCanvas" style="position:absolute;inset:0;z-index:1;"></canvas>
   <div style="position:absolute;inset:0;z-index:2;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:800px;background-repeat:repeat;opacity:.04;"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 20% 80%,rgba(239,190,125,.08) 0%,transparent 50%);"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 80% 20%,rgba(27,29,54,.15) 0%,transparent 50%);"></div>
-  <div style="position:absolute;inset:0;z-index:4;background:linear-gradient(180deg,rgba(74,24,30,.35) 0%,transparent 30%,transparent 70%,rgba(74,24,30,.5) 100%);"></div>
+  <div style="position:absolute;inset:0;z-index:4;background:linear-gradient(180deg,rgba(74,24,30,.2) 0%,transparent 25%,transparent 75%,rgba(74,24,30,.5) 100%);"></div>
   <div id="particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;"></div>
 
   <div style="position:relative;z-index:10;text-align:center;max-width:860px;padding:2rem 2rem 5rem;">
@@ -400,10 +400,6 @@
     </div>
   </div>
 
-  <div style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:.5;z-index:10;pointer-events:none;">
-    <span style="font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);">Keşfet</span>
-    <div style="width:1px;height:24px;background:linear-gradient(180deg,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;"></div>
-  </div>
 </section>
 
 
@@ -992,90 +988,6 @@
   // Social hover
   document.querySelectorAll('[aria-label]').forEach(a=>{a.addEventListener('mouseenter',function(){this.style.background='var(--claret-light)'});a.addEventListener('mouseleave',function(){this.style.background=''})});
 
-  // ===== BEAMS BACKGROUND =====
-  (function(){
-    const canvas=document.getElementById('beamsCanvas');
-    if(!canvas)return;
-    const ctx=canvas.getContext('2d');
-    if(!ctx)return;
-
-    const BEAM_COUNT=30;
-    let beams=[];
-    let animFrame=0;
-
-    function createBeam(){
-      const angle=-35+Math.random()*10;
-      // Mix of gold beams and warm claret beams
-      const isGold=Math.random()>.4;
-      return{
-        x:Math.random()*canvas.width*1.5-canvas.width*.25,
-        y:Math.random()*canvas.height*1.5-canvas.height*.25,
-        width:40+Math.random()*100,
-        length:canvas.height*2.5,
-        angle:angle,
-        speed:.3+Math.random()*.8,
-        opacity:isGold?(.1+Math.random()*.12):(.07+Math.random()*.08),
-        hue:isGold?(30+Math.random()*15):(350+Math.random()*15), // gold(30-45) or claret(350-5)
-        sat:isGold?(70+Math.random()*20):(50+Math.random()*20),
-        light:isGold?(55+Math.random()*20):(35+Math.random()*15),
-        pulse:Math.random()*Math.PI*2,
-        pulseSpeed:.015+Math.random()*.025,
-      };
-    }
-
-    function resize(){
-      const dpr=window.devicePixelRatio||1;
-      canvas.width=canvas.offsetWidth*dpr;
-      canvas.height=canvas.offsetHeight*dpr;
-      ctx.scale(dpr,dpr);
-      beams=Array.from({length:BEAM_COUNT},()=>createBeam());
-    }
-
-    function resetBeam(beam,index){
-      const column=index%3;
-      const spacing=canvas.offsetWidth/3;
-      beam.y=canvas.offsetHeight+100;
-      beam.x=column*spacing+spacing/2+(Math.random()-.5)*spacing*.5;
-      beam.width=60+Math.random()*100;
-      beam.speed=.3+Math.random()*.5;
-      beam.opacity=.06+Math.random()*.08;
-      return beam;
-    }
-
-    function drawBeam(beam){
-      ctx.save();
-      ctx.translate(beam.x,beam.y);
-      ctx.rotate(beam.angle*Math.PI/180);
-      const pulsing=beam.opacity*(.8+Math.sin(beam.pulse)*.2);
-      const grad=ctx.createLinearGradient(0,0,0,beam.length);
-      const c=`hsla(${beam.hue},${beam.sat}%,${beam.light}%,`;
-      grad.addColorStop(0,c+'0)');
-      grad.addColorStop(.1,c+(pulsing*.5)+')');
-      grad.addColorStop(.4,c+pulsing+')');
-      grad.addColorStop(.6,c+pulsing+')');
-      grad.addColorStop(.9,c+(pulsing*.5)+')');
-      grad.addColorStop(1,c+'0)');
-      ctx.fillStyle=grad;
-      ctx.fillRect(-beam.width/2,0,beam.width,beam.length);
-      ctx.restore();
-    }
-
-    function animate(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.filter='blur(35px)';
-      beams.forEach((beam,i)=>{
-        beam.y-=beam.speed;
-        beam.pulse+=beam.pulseSpeed;
-        if(beam.y+beam.length<-100)resetBeam(beam,i);
-        drawBeam(beam);
-      });
-      animFrame=requestAnimationFrame(animate);
-    }
-
-    resize();
-    window.addEventListener('resize',resize);
-    animate();
-  })();
 </script>
 
 </body>
