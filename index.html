@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dede &mdash; Bir Kaşık Daha</title>
+  <meta name="description" content="Dede Çorba — Binlerce yıllık çorba geleneğini modern sofralara taşıyan lezzet durağı.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --gold: #EFBE7D;
+      --gold-light: #F5D4A0;
+      --gold-dark: #D4A054;
+      --claret: #622128;
+      --claret-light: #7A2D35;
+      --midnight: #1B1D36;
+      --emerald: #183029;
+      --gray: #D9D9D6;
+      --cream: #FAF6F0;
+      --surface: #0A0A0A;
+      --surface-el: #111111;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width:5px }
+    ::-webkit-scrollbar-track { background:var(--black) }
+    ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px }
+
+    /* ===== GRAIN ===== */
+    body::after {
+      content:'';
+      position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+
+    /* ===== GOLD SHIMMER ===== */
+    .gold-shimmer {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0%,100%{background-position:0% center} 50%{background-position:200% center} }
+
+    /* ===== REVEAL ===== */
+    .rv {
+      opacity:0; transform:translateY(36px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .rv.vis { opacity:1; transform:translateY(0) }
+    .rv-d1{transition-delay:.1s} .rv-d2{transition-delay:.2s} .rv-d3{transition-delay:.3s}
+    .rv-d4{transition-delay:.4s} .rv-d5{transition-delay:.5s} .rv-d6{transition-delay:.6s}
+
+    /* ===== PARTICLES ===== */
+    .particle {
+      position:absolute; width:2px; height:2px; background:var(--gold);
+      border-radius:50%; opacity:0; animation: floatUp 6s ease-in infinite;
+    }
+    @keyframes floatUp {
+      0%{opacity:0;transform:translateY(0) scale(1)} 10%{opacity:.5}
+      90%{opacity:0} 100%{opacity:0;transform:translateY(-300px) scale(0)}
+    }
+    @keyframes subtleFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.6} }
+
+    /* ===== NAV ===== */
+    #nav {
+      position:fixed; top:0; left:0; width:100%; z-index:100;
+      transition: background .4s, backdrop-filter .4s, box-shadow .4s;
+    }
+    .nav-inner {
+      max-width:1400px; margin:0 auto; padding:1.4rem 2.5rem;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .nav-link {
+      position:relative; font-size:.72rem; font-weight:500; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--gray); text-decoration:none;
+      transition: color .3s cubic-bezier(.16,1,.3,1);
+    }
+    .nav-link::after {
+      content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
+      background:var(--gold); transition: width .3s cubic-bezier(.16,1,.3,1);
+    }
+    .nav-link:hover { color:var(--gold) }
+    .nav-link:hover::after { width:100% }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:.7rem;
+      padding:.85rem 2rem; background:linear-gradient(135deg, var(--claret), var(--claret-light));
+      color:var(--cream); font-family:var(--font-body); font-weight:600; font-size:.78rem;
+      letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
+      border:1px solid rgba(239,190,125,.15); border-radius:2px; cursor:pointer;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow: 0 8px 30px rgba(98,33,40,.35), 0 0 0 1px rgba(239,190,125,.2);
+    }
+    .btn-primary:active { transform:translateY(0) }
+    .btn-primary:focus-visible { outline:2px solid var(--gold); outline-offset:4px }
+
+    .btn-outline {
+      display:inline-flex; align-items:center; gap:.7rem;
+      padding:.85rem 2rem; background:transparent;
+      color:var(--gold); font-family:var(--font-body); font-weight:600; font-size:.78rem;
+      letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
+      border:1px solid rgba(239,190,125,.3); border-radius:2px; cursor:pointer;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s, background .3s;
+    }
+    .btn-outline:hover {
+      transform:translateY(-2px); border-color:var(--gold);
+      background:rgba(239,190,125,.04); box-shadow:0 8px 30px rgba(239,190,125,.06);
+    }
+    .btn-outline:active { transform:translateY(0) }
+    .btn-outline:focus-visible { outline:2px solid var(--gold); outline-offset:4px }
+
+    .btn-gold {
+      display:inline-flex; align-items:center; gap:.7rem;
+      padding:.85rem 2rem; background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color:var(--black); font-family:var(--font-body); font-weight:700; font-size:.78rem;
+      letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
+      border:none; border-radius:2px; cursor:pointer;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+    }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(239,190,125,.25) }
+    .btn-gold:active { transform:translateY(0) }
+    .btn-gold:focus-visible { outline:2px solid var(--gold); outline-offset:4px }
+
+    /* ===== MENU CARD ===== */
+    .menu-card {
+      background: linear-gradient(160deg, rgba(27,29,54,.35), rgba(0,0,0,.7));
+      border:1px solid rgba(239,190,125,.08); border-radius:3px; padding:2.25rem;
+      transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .4s, box-shadow .4s;
+    }
+    .menu-card:hover {
+      transform:translateY(-3px); border-color:rgba(239,190,125,.2);
+      box-shadow:0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(239,190,125,.03);
+    }
+
+    /* ===== DIVIDER ===== */
+    .deco-divider {
+      height:50px; background-image:url('dedecorba-media/100.png');
+      background-size:auto 50px; background-repeat:repeat-x; background-position:center; opacity:.25;
+    }
+
+    /* ===== CORNER DECO ===== */
+    .corner{position:absolute;width:32px;height:32px;opacity:.35}
+    .corner::before,.corner::after{content:'';position:absolute;background:var(--gold)}
+    .corner.tl::before{top:0;left:0;width:32px;height:1px}
+    .corner.tl::after{top:0;left:0;width:1px;height:32px}
+    .corner.tr::before{top:0;right:0;width:32px;height:1px}
+    .corner.tr::after{top:0;right:0;width:1px;height:32px}
+    .corner.bl::before{bottom:0;left:0;width:32px;height:1px}
+    .corner.bl::after{bottom:0;left:0;width:1px;height:32px}
+    .corner.br::before{bottom:0;right:0;width:32px;height:1px}
+    .corner.br::after{bottom:0;right:0;width:1px;height:32px}
+
+    /* ===== FORM ===== */
+    .fi {
+      width:100%; padding:.85rem 1.2rem;
+      background:rgba(27,29,54,.3); border:1px solid rgba(239,190,125,.12);
+      border-radius:2px; color:var(--cream); font-family:var(--font-body);
+      font-size:.88rem; outline:none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .fi::placeholder { color:rgba(217,217,214,.35) }
+    .fi:focus { border-color:rgba(239,190,125,.4); box-shadow:0 0 20px rgba(239,190,125,.06) }
+
+    /* ===== HAMBURGER ===== */
+    .ham{background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;z-index:101}
+    .ham span{display:block;width:22px;height:1.5px;background:var(--gold);transition:transform .3s,opacity .3s}
+    .ham.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .ham.active span:nth-child(2){opacity:0}
+    .ham.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+    /* ===== MOBILE NAV ===== */
+    .mnav{
+      position:fixed;top:0;right:-100%;width:100%;height:100vh;
+      background:rgba(0,0,0,.97);backdrop-filter:blur(20px);z-index:95;
+      transition:right .4s cubic-bezier(.16,1,.3,1);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+    }
+    .mnav.open{right:0}
+    .mnav a{font-family:var(--font-display);font-size:2rem;color:var(--gray);text-decoration:none;transition:color .3s}
+    .mnav a:hover{color:var(--gold)}
+
+    /* ===== SECTION LABEL ===== */
+    .sec-label {
+      display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;
+    }
+    .sec-label .line { width:40px; height:1px; background:var(--gold) }
+    .sec-label span {
+      font-size:.68rem; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--gold); font-weight:500;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px) {
+      .ham { display:flex }
+      .desk-nav { display:none!important }
+      .nav-inner { padding:1.2rem 1.5rem }
+      .grid-2 { grid-template-columns:1fr!important }
+      .hero-cats { gap:1rem!important }
+      .hero-cats .cat-divider { display:none }
+      .stats-grid { grid-template-columns:1fr 1fr!important }
+      .footer-grid { grid-template-columns:1fr!important }
+    }
+    @media(max-width:480px) {
+      .hero-cats { flex-direction:column; align-items:center }
+      .stats-grid { grid-template-columns:1fr!important }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" style="text-decoration:none;display:flex;align-items:center;">
+      <img src="dedecorba-logolar/98.png" alt="Dede - Bir Kaşık Daha" id="navLogo"
+        style="height:42px;filter:brightness(0) invert(1);transition:height .3s;">
+    </a>
+    <div class="desk-nav" style="display:flex;align-items:center;gap:2.5rem;">
+      <a href="#hakkimizda" class="nav-link">Hakkımızda</a>
+      <a href="#menu" class="nav-link">Menü</a>
+      <a href="#franchise" class="nav-link">Franchise</a>
+      <a href="#iletisim" class="nav-link">İletişim</a>
+      <a href="#iletisim" class="btn-primary" style="padding:.6rem 1.4rem;font-size:.7rem;">Franchise Başvurusu</a>
+    </div>
+    <button class="ham" onclick="toggleMenu()" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mnav" id="mnav">
+  <a href="#hero" onclick="closeMenu()">Ana Sayfa</a>
+  <a href="#hakkimizda" onclick="closeMenu()">Hakkımızda</a>
+  <a href="#menu" onclick="closeMenu()">Menü</a>
+  <a href="#franchise" onclick="closeMenu()">Franchise</a>
+  <a href="#iletisim" onclick="closeMenu()">İletişim</a>
+</div>
+
+
+<!-- ========== HERO ========== -->
+<section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <!-- BG pattern -->
+  <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:800px;background-repeat:repeat;opacity:.05;"></div>
+  <!-- Gradients -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%, rgba(98,33,40,.18) 0%, transparent 50%);"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%, rgba(27,29,54,.25) 0%, transparent 50%);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 30%, transparent 70%, rgba(0,0,0,.8) 100%);"></div>
+  <!-- Particles -->
+  <div id="particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+
+  <div style="position:relative;z-index:10;text-align:center;max-width:860px;padding:2rem;">
+    <!-- Top line -->
+    <div class="rv" style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2.5rem;">
+      <div style="width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));"></div>
+      <span style="font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">Est. 2024 &middot; İzmir</span>
+      <div style="width:50px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);"></div>
+    </div>
+
+    <!-- Logo -->
+    <div class="rv rv-d1" style="margin-bottom:2rem;">
+      <img src="dedecorba-logolar/97.png" alt="Dede" style="height:160px;margin:0 auto;display:block;filter:brightness(0) invert(1);animation:subtleFloat 6s ease-in-out infinite;">
+    </div>
+
+    <!-- Slogan -->
+    <h1 class="rv rv-d2" style="font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem;">
+      <span class="gold-shimmer">Bir Kaşık Daha</span>
+    </h1>
+
+    <!-- Sub -->
+    <p class="rv rv-d3" style="font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--gray);line-height:1.8;max-width:560px;margin:0 auto 2.5rem;font-weight:300;">
+      Binlerce yıllık çorba geleneğini, ustalık ve kaliteyle her kaseye taşıyoruz.<br>
+      Her kaşıkta bir hafıza, her kasede bir gelenek.
+    </p>
+
+    <!-- CTAs -->
+    <div class="rv rv-d4" style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;">
+      <a href="#menu" class="btn-primary">
+        Menüyü Keşfet
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+      <a href="#hakkimizda" class="btn-outline">Hikayemiz</a>
+    </div>
+
+    <!-- Categories -->
+    <div class="rv rv-d5 hero-cats" style="margin-top:4rem;display:flex;align-items:center;justify-content:center;gap:2rem;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Çorba</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.2rem;">Geleneksel</div>
+      </div>
+      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Pilav</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.2rem;">Tereyağlı</div>
+      </div>
+      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Tandır</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.2rem;">Enfes</div>
+      </div>
+      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.2);"></div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Lahmacun</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.2rem;">Kıtır</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:.45;">
+    <span style="font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gray);">Keşfet</span>
+    <div style="width:1px;height:28px;background:linear-gradient(180deg,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;"></div>
+  </div>
+</section>
+
+
+<!-- ========== DIVIDER ========== -->
+<div class="deco-divider"></div>
+
+
+<!-- ========== HAKKIMIZDA ========== -->
+<section id="hakkimizda" style="position:relative;padding:7rem 2rem;overflow:hidden;">
+  <div style="position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(270deg,rgba(27,29,54,.1) 0%,transparent 100%);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <div class="sec-label rv"><div class="line"></div><span>Hakkımızda</span></div>
+
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+      <!-- Text -->
+      <div>
+        <h2 class="rv" style="font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;margin-bottom:2rem;">
+          Ateşin Etrafında<br><span style="color:var(--gold);font-style:italic;">Başlayan Hikâye</span>
+        </h2>
+
+        <div class="rv rv-d1" style="display:flex;flex-direction:column;gap:1.4rem;color:var(--gray);font-size:.92rem;line-height:1.85;font-weight:300;">
+          <p>Bir tasın içine sığar ama içinde medeniyetlerin çeşnisi, doğanın şifası ve tüm dünyanın öğünü vardır. O koku, insanları aynı masa etrafında toplar, nerede olursanız olun sıcaklığıyla kalpleri ısıtır.</p>
+          <p>Çorba, Türk mutfağının köklerinde, yemek tarihinin başlangıç noktasında durur. Orta Asya bozkırlarından Anadolu'ya, imparatorluk mutfaklarına uzanan zengin serüvende her durakta yeni tatlar eklendi.</p>
+          <p><strong style="color:var(--cream);">DEDE</strong>, bu binlerce yıllık geleneği aslına sadık kalarak korur. Ustalık ve kaliteyi standartlaştırılmış bir disiplinle her noktada aynı seviyede sunar. Her kaseyi bir tariften öte, bir <em style="color:var(--gold);">hafıza</em> olarak sunar.</p>
+        </div>
+
+        <!-- Values -->
+        <div class="rv rv-d2" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem;">
+          <div style="padding:1.1rem;border-left:2px solid rgba(239,190,125,.25);">
+            <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--gold);font-style:italic;">Gelenek</div>
+            <div style="font-size:.75rem;color:rgba(217,217,214,.5);line-height:1.6;margin-top:.2rem;">Kadim Anadolu sofra kültürü</div>
+          </div>
+          <div style="padding:1.1rem;border-left:2px solid rgba(239,190,125,.25);">
+            <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--gold);font-style:italic;">Kalite</div>
+            <div style="font-size:.75rem;color:rgba(217,217,214,.5);line-height:1.6;margin-top:.2rem;">Ödünsüz lezzet anlayışı</div>
+          </div>
+          <div style="padding:1.1rem;border-left:2px solid rgba(239,190,125,.25);">
+            <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--gold);font-style:italic;">Güven</div>
+            <div style="font-size:.75rem;color:rgba(217,217,214,.5);line-height:1.6;margin-top:.2rem;">Hijyen ve kalitede sıfır tolerans</div>
+          </div>
+          <div style="padding:1.1rem;border-left:2px solid rgba(239,190,125,.25);">
+            <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--gold);font-style:italic;">Lezzet</div>
+            <div style="font-size:.75rem;color:rgba(217,217,214,.5);line-height:1.6;margin-top:.2rem;">Bir kaşık daha isteği</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="rv rv-d2" style="position:relative;">
+        <div style="position:relative;border-radius:3px;overflow:hidden;">
+          <div style="position:absolute;inset:0;z-index:2;pointer-events:none;">
+            <div class="corner tl" style="top:10px;left:10px;"></div>
+            <div class="corner tr" style="top:10px;right:10px;"></div>
+            <div class="corner bl" style="bottom:10px;left:10px;"></div>
+            <div class="corner br" style="bottom:10px;right:10px;"></div>
+          </div>
+          <div style="aspect-ratio:4/5;background:linear-gradient(155deg,var(--midnight),#080808);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:350px;background-repeat:repeat;opacity:.07;"></div>
+            <img src="dedecorba-logolar/97.png" alt="Dede" style="height:180px;filter:brightness(0) invert(1);opacity:.12;position:relative;z-index:1;">
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);z-index:2;">
+              <div style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold);font-style:italic;line-height:1.4;">"Lezzetin ölçüsü, doymak değil,<br>bırakmak istememektir."</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;top:50%;right:-16px;transform:translateY(-50%);width:1px;height:35%;background:linear-gradient(180deg,transparent,var(--gold),transparent);opacity:.2;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== DIVIDER ========== -->
+<div class="deco-divider"></div>
+
+
+<!-- ========== MENÜ ========== -->
+<section id="menu" style="position:relative;padding:7rem 2rem;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(27,29,54,.15) 0%,transparent 55%);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:4.5rem;">
+      <div class="sec-label rv" style="justify-content:center;"><div class="line"></div><span>Menümüz</span><div class="line"></div></div>
+      <h2 class="rv rv-d1" style="font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;">
+        Geleneksel Lezzetler,<br><span style="color:var(--gold);font-style:italic;">Modern Sunum</span>
+      </h2>
+      <p class="rv rv-d2" style="color:var(--gray);font-size:.92rem;max-width:480px;margin:1rem auto 0;line-height:1.75;font-weight:300;">
+        Anadolu'nun zengin mutfak mirasından özenle seçilmiş tatlar, her gün taze ve geleneksel tariflerle.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;">
+
+      <!-- Çorbalar -->
+      <div class="menu-card rv">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">Çorbalar</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Signature Collection</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 13c0 3.87 3.13 7 7 7h4c3.87 0 7-3.13 7-7M2 13h20M12 3c-1.66 0-3 2.24-3 5h6c0-2.76-1.34-5-3-5z"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Mercimek Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Ezogelin Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">İşkembe Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Tarhana Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Yayla Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Paça Çorbası</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">Her gün taze, geleneksel tariflerle hazırlanan özel çorbalar.</p>
+      </div>
+
+      <!-- Pilav -->
+      <div class="menu-card rv rv-d1">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">Pilav Çeşitleri</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Geleneksel Tarifler</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Tereyağlı Pilav</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Nohutlu Pilav</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Bulgur Pilavı</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">Tane tane, tereyağlı pilavlar. Çorbalarınızın en iyi dostu.</p>
+      </div>
+
+      <!-- Tandır -->
+      <div class="menu-card rv rv-d2">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">Tandır</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Özel Pişirim</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Kuzu Tandır</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Tandır Dürüm</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Tandır Porsiyon</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">Saatlerce yavaş pişirilen, ağızda dağılan tandır lezzetleri.</p>
+      </div>
+
+      <!-- Lahmacun -->
+      <div class="menu-card rv rv-d3">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">Lahmacun</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Taş Fırın</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Lahmacun</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Kaşarlı Lahmacun</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">İnce hamur, bol malzeme, taş fırında pişen kıtır lahmacunlar.</p>
+      </div>
+
+      <!-- İçecekler -->
+      <div class="menu-card rv rv-d4">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">İçecekler</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Serinletici</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M8 2v4m8-4v4M6 8h12l-1.5 12H7.5L6 8z"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Ayran</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Şalgam</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Meşrubat</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Su</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">Yemeklerinizin yanına ferahlatıcı içecekler.</p>
+      </div>
+
+      <!-- Yan Lezzetler -->
+      <div class="menu-card rv rv-d5">
+        <div style="display:flex;align-items:start;justify-content:space-between;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;">Yan Lezzetler</h3>
+            <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.35);margin-top:.15rem;">Tamamlayıcı</div>
+          </div>
+          <div style="width:36px;height:36px;border:1px solid rgba(239,190,125,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Pide Ekmeği</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Salata</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;">
+            <span style="font-size:.88rem;color:var(--cream);">Cacık</span>
+            <span style="flex:1;border-bottom:1px dotted rgba(239,190,125,.1);min-width:20px;"></span>
+          </div>
+        </div>
+        <p style="font-size:.74rem;color:rgba(217,217,214,.35);margin-top:1.25rem;line-height:1.6;font-style:italic;">Ana yemeğinizi tamamlayacak geleneksel tatlar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== FRANCHISE BANNER ========== -->
+<section style="position:relative;padding:5.5rem 2rem;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--claret),var(--midnight));"></div>
+  <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:500px;background-repeat:repeat;opacity:.05;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent,rgba(0,0,0,.35));"></div>
+  <div style="max-width:750px;margin:0 auto;text-align:center;position:relative;z-index:1;">
+    <div class="rv" style="font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;">Franchise Fırsatı</div>
+    <h2 class="rv rv-d1" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;line-height:1.2;margin-bottom:1.3rem;font-style:italic;">
+      Kanıtlanmış Modelin Parçası Olun
+    </h2>
+    <p class="rv rv-d2" style="color:rgba(250,246,240,.65);font-size:.92rem;line-height:1.75;max-width:520px;margin:0 auto 2rem;font-weight:300;">
+      Dede'nin standartlaştırılmış operasyon sistemiyle kendi işinizin sahibi olun.
+    </p>
+    <a href="#franchise" class="btn-gold rv rv-d3">
+      Detaylı Bilgi
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ========== FRANCHISE ========== -->
+<section id="franchise" style="position:relative;padding:7rem 2rem;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(98,33,40,.06) 0%,transparent 55%);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <div style="text-align:center;margin-bottom:4.5rem;">
+      <div class="sec-label rv" style="justify-content:center;"><div class="line"></div><span>Franchise</span><div class="line"></div></div>
+      <h2 class="rv rv-d1" style="font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;">
+        Büyüyen Şey Ürün Değil,<br><span style="color:var(--gold);font-style:italic;">Sistemdir</span>
+      </h2>
+      <p class="rv rv-d2" style="color:var(--gray);font-size:.92rem;max-width:560px;margin:1rem auto 0;line-height:1.75;font-weight:300;">
+        Dede, çorbayı bir buluşma, bir ritüel, bir şehir alışkanlığı haline getirmek için kuruldu.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="rv stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,190,125,.08);border:1px solid rgba(239,190,125,.08);border-radius:3px;margin-bottom:4.5rem;overflow:hidden;">
+      <div style="background:var(--black);text-align:center;padding:2rem 1rem;">
+        <div class="gold-shimmer" style="font-family:var(--font-display);font-size:2.8rem;font-weight:600;line-height:1;">6</div>
+        <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.5rem;">Büyüme Aşaması</div>
+      </div>
+      <div style="background:var(--black);text-align:center;padding:2rem 1rem;">
+        <div class="gold-shimmer" style="font-family:var(--font-display);font-size:2.8rem;font-weight:600;line-height:1;">%100</div>
+        <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.5rem;">Merkezi Destek</div>
+      </div>
+      <div style="background:var(--black);text-align:center;padding:2rem 1rem;">
+        <div class="gold-shimmer" style="font-family:var(--font-display);font-size:2.8rem;font-weight:600;line-height:1;">24/7</div>
+        <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.5rem;">İletişim</div>
+      </div>
+      <div style="background:var(--black);text-align:center;padding:2rem 1rem;">
+        <div style="font-family:var(--font-display);font-size:2.8rem;font-weight:600;line-height:1;color:var(--gold);">Hızlı</div>
+        <div style="font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(217,217,214,.4);margin-top:.5rem;">Açılış Süreci</div>
+      </div>
+    </div>
+
+    <!-- Two columns -->
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+      <!-- Why -->
+      <div>
+        <h3 class="rv" style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;margin-bottom:2rem;">Neden Dede Franchise?</h3>
+        <div style="display:flex;flex-direction:column;gap:1.4rem;">
+          <div class="rv rv-d1" style="display:flex;gap:1.1rem;align-items:start;">
+            <div style="min-width:36px;height:36px;border:1px solid rgba(239,190,125,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);color:var(--gold);font-size:.85rem;">01</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Kanıtlanmış İş Modeli</div>
+              <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Test edilmiş ve başarısı kanıtlanmış bir sistemi uygulayın.</div>
+            </div>
+          </div>
+          <div class="rv rv-d2" style="display:flex;gap:1.1rem;align-items:start;">
+            <div style="min-width:36px;height:36px;border:1px solid rgba(239,190,125,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);color:var(--gold);font-size:.85rem;">02</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Düşük Operasyon Riski</div>
+              <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Sade menü, standart üretim, düşük personel ihtiyacı.</div>
+            </div>
+          </div>
+          <div class="rv rv-d3" style="display:flex;gap:1.1rem;align-items:start;">
+            <div style="min-width:36px;height:36px;border:1px solid rgba(239,190,125,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);color:var(--gold);font-size:.85rem;">03</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Güçlü Marka Desteği</div>
+              <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Eğitim, kurulum, pazarlama ve sürekli iletişim desteği.</div>
+            </div>
+          </div>
+          <div class="rv rv-d4" style="display:flex;gap:1.1rem;align-items:start;">
+            <div style="min-width:36px;height:36px;border:1px solid rgba(239,190,125,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);color:var(--gold);font-size:.85rem;">04</div>
+            <div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Stabil Gelir Potansiyeli</div>
+              <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Gün boyu satış, yüksek tekrar müşteri oranı.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Growth -->
+      <div>
+        <h3 class="rv" style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:600;font-style:italic;margin-bottom:2rem;">Büyüme Stratejisi</h3>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div class="rv rv-d1" style="display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;background:rgba(27,29,54,.25);border-left:2px solid var(--gold);border-radius:0 3px 3px 0;">
+            <span style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;min-width:20px;">1</span>
+            <div><span style="font-weight:500;font-size:.9rem;">İzmir</span> <span style="font-size:.75rem;color:rgba(217,217,214,.35);">— Referans: Bostanlı</span></div>
+          </div>
+          <div class="rv rv-d2" style="display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;background:rgba(27,29,54,.18);border-left:2px solid rgba(239,190,125,.6);border-radius:0 3px 3px 0;">
+            <span style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;min-width:20px;">2</span>
+            <span style="font-weight:500;font-size:.9rem;">Ege Bölgesi</span>
+          </div>
+          <div class="rv rv-d3" style="display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;background:rgba(27,29,54,.12);border-left:2px solid rgba(239,190,125,.4);border-radius:0 3px 3px 0;">
+            <span style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;min-width:20px;">3</span>
+            <span style="font-weight:500;font-size:.9rem;">Türkiye Geneli</span>
+          </div>
+          <div class="rv rv-d4" style="display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;background:rgba(27,29,54,.08);border-left:2px solid rgba(239,190,125,.25);border-radius:0 3px 3px 0;">
+            <span style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;min-width:20px;">4</span>
+            <span style="font-weight:500;font-size:.9rem;">Bölge Coğrafyası</span>
+          </div>
+          <div class="rv rv-d5" style="display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;background:rgba(27,29,54,.04);border-left:2px solid rgba(239,190,125,.12);border-radius:0 3px 3px 0;">
+            <span style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;min-width:20px;">5</span>
+            <span style="font-weight:500;font-size:.9rem;">Avrupa & Dünya</span>
+          </div>
+        </div>
+
+        <!-- Investor box -->
+        <div class="rv rv-d6" style="margin-top:2rem;padding:1.75rem;border:1px solid rgba(239,190,125,.1);border-radius:3px;background:rgba(0,0,0,.4);">
+          <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-style:italic;margin-bottom:.8rem;">Yatırımcıya Sağlananlar</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Marka kullanımı
+            </div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Operasyon sistemi
+            </div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Eğitim desteği
+            </div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Reçete yönetimi
+            </div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Pazarlama altyapısı
+            </div>
+            <div style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--gray);">
+              <div style="width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0;"></div>Sürekli denetim
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== DIVIDER ========== -->
+<div class="deco-divider"></div>
+
+
+<!-- ========== İLETİŞİM ========== -->
+<section id="iletisim" style="position:relative;padding:7rem 2rem;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(27,29,54,.15) 0%,transparent 55%);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <div style="text-align:center;margin-bottom:4.5rem;">
+      <div class="sec-label rv" style="justify-content:center;"><div class="line"></div><span>İletişim</span><div class="line"></div></div>
+      <h2 class="rv rv-d1" style="font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;">
+        Bize <span style="color:var(--gold);font-style:italic;">Ulaşın</span>
+      </h2>
+      <p class="rv rv-d2" style="color:var(--gray);font-size:.92rem;max-width:460px;margin:1rem auto 0;line-height:1.75;font-weight:300;">
+        Sorularınız, önerileriniz veya franchise başvurusu için bizimle iletişime geçin.
+      </p>
+    </div>
+
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;">
+      <!-- Info -->
+      <div style="display:flex;flex-direction:column;gap:1.8rem;">
+        <div class="rv" style="display:flex;gap:1.1rem;align-items:start;">
+          <div style="min-width:44px;height:44px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Adres</div>
+            <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Bostanlı, İzmir<br>Türkiye</div>
+          </div>
+        </div>
+
+        <div class="rv rv-d1" style="display:flex;gap:1.1rem;align-items:start;">
+          <div style="min-width:44px;height:44px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Telefon</div>
+            <a href="tel:+905001234567" style="font-size:.82rem;color:rgba(217,217,214,.5);text-decoration:none;transition:color .3s;">+90 (500) 123 45 67</a>
+          </div>
+        </div>
+
+        <div class="rv rv-d2" style="display:flex;gap:1.1rem;align-items:start;">
+          <div style="min-width:44px;height:44px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">E-posta</div>
+            <a href="mailto:info@dedecorba.com.tr" style="font-size:.82rem;color:rgba(217,217,214,.5);text-decoration:none;transition:color .3s;">info@dedecorba.com.tr</a>
+          </div>
+        </div>
+
+        <div class="rv rv-d3" style="display:flex;gap:1.1rem;align-items:start;">
+          <div style="min-width:44px;height:44px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;margin-bottom:.15rem;">Çalışma Saatleri</div>
+            <div style="font-size:.82rem;color:rgba(217,217,214,.5);line-height:1.7;">Her gün: 07:00 — 23:00</div>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="rv rv-d4" style="display:flex;gap:.8rem;margin-top:.5rem;">
+          <a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color .3s,background .3s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook" style="width:40px;height:40px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color .3s,background .3s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="X" style="width:40px;height:40px;border:1px solid rgba(239,190,125,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color .3s,background .3s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M4 4l11.73 16h4.27l-11.73-16zM4 20l6.77-6.77M13.28 10.72l6.72-6.72"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="rv rv-d1">
+        <form id="contactForm" style="display:flex;flex-direction:column;gap:1.1rem;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;">
+            <input type="text" placeholder="Adınız" class="fi" required>
+            <input type="text" placeholder="Soyadınız" class="fi" required>
+          </div>
+          <input type="email" placeholder="E-posta Adresiniz" class="fi" required>
+          <input type="tel" placeholder="Telefon Numaranız" class="fi">
+          <select class="fi" style="appearance:none;cursor:pointer;">
+            <option value="" style="background:var(--midnight);">Konu Seçiniz</option>
+            <option value="genel" style="background:var(--midnight);">Genel Bilgi</option>
+            <option value="franchise" style="background:var(--midnight);">Franchise Başvurusu</option>
+            <option value="oneri" style="background:var(--midnight);">Öneri & Şikâyet</option>
+            <option value="isbirligi" style="background:var(--midnight);">İş Birliği</option>
+          </select>
+          <textarea placeholder="Mesajınız" class="fi" rows="5" style="resize:vertical;min-height:110px;" required></textarea>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+            Gönder
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div id="formSuccess" style="display:none;align-items:center;gap:.6rem;padding:.85rem;background:rgba(24,48,41,.25);border:1px solid rgba(24,48,41,.4);border-radius:3px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span style="font-size:.82rem;color:#4ade80;">Mesajınız başarıyla gönderildi.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== FOOTER ========== -->
+<footer style="position:relative;border-top:1px solid rgba(239,190,125,.08);overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:500px;background-repeat:repeat;opacity:.02;"></div>
+  <div style="max-width:1200px;margin:0 auto;padding:3.5rem 2rem;position:relative;">
+    <div class="footer-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;">
+      <!-- Brand -->
+      <div>
+        <img src="dedecorba-logolar/98.png" alt="Dede" style="height:32px;filter:brightness(0) invert(1);margin-bottom:1rem;">
+        <p style="font-size:.78rem;color:rgba(217,217,214,.35);line-height:1.7;max-width:260px;">
+          Binlerce yıllık çorba geleneğini, ustalık ve kaliteyle her kaseye taşıyan lezzet durağı.
+        </p>
+      </div>
+      <!-- Links -->
+      <div>
+        <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600;">Sayfalar</div>
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+          <a href="#hero" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">Ana Sayfa</a>
+          <a href="#hakkimizda" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">Hakkımızda</a>
+          <a href="#menu" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">Menü</a>
+          <a href="#franchise" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">Franchise</a>
+          <a href="#iletisim" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">İletişim</a>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600;">İletişim</div>
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+          <span style="font-size:.8rem;color:rgba(217,217,214,.4);">Bostanlı, İzmir</span>
+          <a href="tel:+905001234567" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">+90 (500) 123 45 67</a>
+          <a href="mailto:info@dedecorba.com.tr" style="font-size:.8rem;color:rgba(217,217,214,.4);text-decoration:none;transition:color .3s;">info@dedecorba.com.tr</a>
+        </div>
+      </div>
+      <!-- Franchise -->
+      <div>
+        <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600;">Franchise</div>
+        <p style="font-size:.78rem;color:rgba(217,217,214,.35);line-height:1.7;margin-bottom:.8rem;">Kendi Dede şubenizi açmak için başvurun.</p>
+        <a href="#iletisim" class="btn-outline" style="padding:.5rem 1rem;font-size:.65rem;">Başvuru</a>
+      </div>
+    </div>
+    <!-- Bottom -->
+    <div style="border-top:1px solid rgba(239,190,125,.06);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;">
+      <span style="font-size:.7rem;color:rgba(217,217,214,.25);">&copy; 2024 Dede. Tüm hakları saklıdır.</span>
+      <div style="display:flex;gap:1.25rem;">
+        <a href="#" style="font-size:.7rem;color:rgba(217,217,214,.25);text-decoration:none;transition:color .3s;">Gizlilik Politikası</a>
+        <a href="#" style="font-size:.7rem;color:rgba(217,217,214,.25);text-decoration:none;transition:color .3s;">Kullanım Koşulları</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ========== JS ========== -->
+<script>
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+  }, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // Navbar
+  window.addEventListener('scroll', () => {
+    const n = document.getElementById('nav');
+    const l = document.getElementById('navLogo');
+    if(window.pageYOffset > 60) {
+      n.style.background = 'rgba(0,0,0,.92)';
+      n.style.backdropFilter = 'blur(16px)';
+      n.style.boxShadow = '0 1px 0 rgba(239,190,125,.06)';
+      l.style.height = '34px';
+    } else {
+      n.style.background = 'transparent';
+      n.style.backdropFilter = 'none';
+      n.style.boxShadow = 'none';
+      l.style.height = '42px';
+    }
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mnav').classList.toggle('open');
+    document.querySelector('.ham').classList.toggle('active');
+    document.body.style.overflow = document.getElementById('mnav').classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('mnav').classList.remove('open');
+    document.querySelector('.ham').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Particles
+  (function(){
+    const c = document.getElementById('particles');
+    if(!c) return;
+    for(let i=0;i<18;i++){
+      const p = document.createElement('div');
+      p.className='particle';
+      p.style.left = Math.random()*100+'%';
+      p.style.top = (50+Math.random()*50)+'%';
+      p.style.animationDelay = Math.random()*6+'s';
+      p.style.animationDuration = (4+Math.random()*4)+'s';
+      c.appendChild(p);
+    }
+  })();
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const t = document.querySelector(this.getAttribute('href'));
+      if(t) {
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 70, behavior:'smooth' });
+      }
+    });
+  });
+
+  // Form
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formSuccess').style.display = 'flex';
+    this.reset();
+  });
+
+  // Footer link hover
+  document.querySelectorAll('footer a').forEach(a => {
+    a.addEventListener('mouseenter', function(){ this.style.color='var(--gold)' });
+    a.addEventListener('mouseleave', function(){ this.style.color='' });
+  });
+
+  // Contact link hover
+  document.querySelectorAll('#iletisim a').forEach(a => {
+    a.addEventListener('mouseenter', function(){ this.style.color='var(--gold)' });
+    a.addEventListener('mouseleave', function(){ this.style.color='' });
+  });
+
+  // Social hover
+  document.querySelectorAll('[aria-label]').forEach(a => {
+    a.addEventListener('mouseenter', function(){ this.style.borderColor='var(--gold)'; this.style.background='rgba(239,190,125,.08)' });
+    a.addEventListener('mouseleave', function(){ this.style.borderColor=''; this.style.background='' });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+DEDE ÇORBA WEB SİTESİ İÇERİK METİNLERİ HAKKINDA BİLGİLENDİRME
+
+Bu çalışma web sitesi için sadece içerik (metin) oluşturulmasını kapsamaktadır.
+Web sitesinin tasarımı, renkleri, fontları, görsel yerleşimleri ve genel tasarım dili ayrıca hazırlanan kurumsal kimlik / tasarım PDF dosyasında belirtilmiştir.
+
+Web sitesi şu bölümlerden oluşacaktır:
+
+Ana Sayfa
+Hakkımızda
+Menü
+Franchise
+İletişim
+
+Referans olarak dedecorba.com.tr web sitesi incelenebilir. Ancak içerikler özgün metinlerden oluşmalıdır.
+
+ANA SAYFA – İÇERİK
+
+Ana sayfada aşağıdaki metin alanları olacaktır:
+
+Marka sloganı / kısa tanıtım yazısı
+Dede Çorba’nın ne sunduğunu anlatan kısa açıklama (çorba, pilav, tandır, lahmacun vb.)
+Geleneksel lezzet, kaliteli malzeme, hızlı servis ve müşteri memnuniyeti vurgusu
+Menü sayfasına yönlendiren kısa tanıtım yazısı
+Franchise sayfasına yönlendiren kısa tanıtım yazısı
+İletişim / şubeler sayfasına yönlendiren kısa tanıtım yazısı
+
+Ana sayfadaki metinler kısa, dikkat çekici ve açıklayıcı olmalıdır. Uzun paragraflar olmamalıdır.
+
+Not: Gerekli tasarım bilgisi kurumsal kimlik dosyasında belirtilmiştir.
+
+HAKKIMIZDA – İÇERİK
+
+Bu sayfada aşağıdaki konuları anlatan kurumsal bir metin olacaktır:
+
+Dede Çorba’nın marka hikayesi
+Geleneksel çorba kültürü ve Türk mutfağı vurgusu
+Kaliteli malzeme ve lezzet anlayışı
+Hijyen, kalite ve müşteri memnuniyeti yaklaşımı
+Markanın hedefi ve hizmet anlayışı
+
+Metin dili kurumsal ama samimi olmalıdır.
+
+Not: Gerekli tasarım bilgisi kurumsal kimlik dosyasında belirtilmiştir.
+
+MENÜ – İÇERİK
+
+Menü sayfasında ürün kategorileri için kısa açıklama metinleri olacaktır.
+
+Kategori örnekleri:
+
+Çorbalar
+Pilav Çeşitleri
+Tandır
+Lahmacun
+İçecekler
+
+Her kategori için kısa, iştah açıcı ve ürünü tanıtan 1–2 cümlelik açıklama metni yazılacaktır.
+
+Not: Gerekli tasarım bilgisi kurumsal kimlik dosyasında belirtilmiştir.
+
+FRANCHISE – İÇERİK
+
+Franchise sayfası web sitesinde yer alacaktır.
+Ancak franchise ile ilgili detaylı içerikler ve bilgiler ayrıca hazırlanan Franchise PDF dosyasında bulunmaktadır. Bu nedenle franchise sayfası içerikleri bu PDF’e göre oluşturulacaktır.
+
+Not: Gerekli tasarım bilgisi kurumsal kimlik dosyasında belirtilmiştir.
+
+İLETİŞİM
+
+İletişim sayfasında aşağıdaki bilgiler yer alacaktır:
+
+Şube adres bilgileri
+Telefon numarası
+Harita konumu
+İletişim formu yönlendirme yazısı
+Franchise iletişim yönlendirmesi
+
+Kısa bir iletişim açıklama metni yazılacaktır.
+
+Not: Gerekli tasarım bilgisi kurumsal kimlik dosyasında belirtilmiştir.
+
+GENEL İÇERİK DİLİ
+
+Tüm metinlerde kullanılacak dil:
+
+Kurumsal ama samimi
+Açıklayıcı ve anlaşılır
+Çok uzun paragraflar olmayacak
+Marka değerlerini anlatan bir dil olacak:
+geleneksel, lezzetli, kaliteli, güvenilir, ulaşılabilir
