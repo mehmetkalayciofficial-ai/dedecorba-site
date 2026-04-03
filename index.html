@@ -219,31 +219,6 @@
       background:linear-gradient(90deg,var(--claret-dark),transparent 20%,transparent 80%,var(--claret-dark));
     }
 
-    /* Ethnic pattern overlay for sections */
-    .ethnic-pattern{
-      position:absolute;inset:0;pointer-events:none;
-      background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');
-      background-size:400px;background-repeat:repeat;opacity:.03;
-    }
-
-    /* Ethnic top/bottom gold accent borders */
-    .ethnic-border-top{position:relative}
-    .ethnic-border-top::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:5;
-      background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;
-    }
-    .ethnic-border-bottom{position:relative}
-    .ethnic-border-bottom::after{
-      content:'';position:absolute;bottom:0;left:0;right:0;height:3px;z-index:5;
-      background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;
-    }
-
-    /* SVG Ottoman/Anatolian geometric motif */
-    .ethnic-motif{
-      position:absolute;opacity:.06;pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23622128' stroke-width='.5'%3E%3Ccircle cx='40' cy='40' r='28'/%3E%3Ccircle cx='40' cy='40' r='18'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3Cpath d='M40 12v56M12 40h56M20 20l40 40M60 20L20 60'/%3E%3Crect x='22' y='22' width='36' height='36' transform='rotate(45 40 40)'/%3E%3Cpath d='M40 12l6 10-6 4-6-4zM40 68l6-10-6-4-6 4zM12 40l10-6 4 6-4 6zM68 40l-10-6-4 6 4 6z'/%3E%3C/g%3E%3C/svg%3E");
-      background-size:80px;background-repeat:repeat;
-    }
 
     /* Ornamental line with diamond */
     .ornament-line{
@@ -304,13 +279,12 @@
       .desk-nav{display:none!important}
       .nav-inner{padding:1.2rem 1.5rem}
       .grid-2{grid-template-columns:1fr!important}
-      .hero-cats{gap:1rem!important}
-      .hero-cats .cat-divider{display:none}
+      .hero-cats{gap:.5rem!important}
       .stats-grid{grid-template-columns:1fr 1fr!important}
       .footer-grid{grid-template-columns:1fr 1fr!important}
     }
     @media(max-width:480px){
-      .hero-cats{flex-direction:column;align-items:center}
+      .hero-cats{gap:.4rem!important}
       .stats-grid{grid-template-columns:1fr!important}
       .footer-grid{grid-template-columns:1fr!important}
     }
@@ -348,13 +322,12 @@
 
 <!-- ========== HERO (Bordo arka plan) ========== -->
 <section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--claret-dark);">
-  <div style="position:absolute;inset:0;z-index:2;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:800px;background-repeat:repeat;opacity:.04;"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 20% 80%,rgba(239,190,125,.08) 0%,transparent 50%);"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 80% 20%,rgba(27,29,54,.15) 0%,transparent 50%);"></div>
   <div style="position:absolute;inset:0;z-index:4;background:linear-gradient(180deg,rgba(74,24,30,.2) 0%,transparent 25%,transparent 75%,rgba(74,24,30,.5) 100%);"></div>
   <div id="particles" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;"></div>
 
-  <div style="position:relative;z-index:10;text-align:center;max-width:860px;padding:2rem 2rem 5rem;">
+  <div style="position:relative;z-index:10;text-align:center;max-width:860px;padding:6rem 2rem 3rem;">
 
     <div class="rv rv-d1" style="margin-bottom:2rem;">
       <img src="dedecorba-logolar/97.png" alt="Dede" style="height:160px;margin:0 auto;display:block;filter:brightness(0) invert(1);animation:subtleFloat 6s ease-in-out infinite;">
@@ -377,26 +350,14 @@
       <a href="#hakkimizda" class="btn-outline">Hikayemiz</a>
     </div>
 
-    <div class="rv rv-d5 hero-cats" style="margin-top:4rem;display:flex;align-items:center;justify-content:center;gap:2rem;">
-      <div style="text-align:center;">
-        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Çorba</div>
-        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;">Geleneksel</div>
-      </div>
-      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.3);"></div>
-      <div style="text-align:center;">
-        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Pilav</div>
-        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;">Tereyağlı</div>
-      </div>
-      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.3);"></div>
-      <div style="text-align:center;">
-        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Tandır</div>
-        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;">Enfes</div>
-      </div>
-      <div class="cat-divider" style="width:1px;height:28px;background:rgba(239,190,125,.3);"></div>
-      <div style="text-align:center;">
-        <div style="font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-weight:500;font-style:italic;">Lahmacun</div>
-        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;">Kıtır</div>
-      </div>
+    <div class="rv rv-d5 hero-cats" style="margin-top:2.5rem;display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;">
+      <span style="font-family:var(--font-display);font-size:1rem;color:var(--gold);font-weight:500;font-style:italic;">Çorba</span>
+      <span class="cat-divider" style="color:rgba(239,190,125,.35);font-size:.7rem;">·</span>
+      <span style="font-family:var(--font-display);font-size:1rem;color:var(--gold);font-weight:500;font-style:italic;">Pilav</span>
+      <span class="cat-divider" style="color:rgba(239,190,125,.35);font-size:.7rem;">·</span>
+      <span style="font-family:var(--font-display);font-size:1rem;color:var(--gold);font-weight:500;font-style:italic;">Tandır</span>
+      <span class="cat-divider" style="color:rgba(239,190,125,.35);font-size:.7rem;">·</span>
+      <span style="font-family:var(--font-display);font-size:1rem;color:var(--gold);font-weight:500;font-style:italic;">Lahmacun</span>
     </div>
   </div>
 
@@ -425,7 +386,6 @@
 
 <!-- ========== HAKKIMIZDA (Beyaz) ========== -->
 <section id="hakkimizda" class="ethnic-border-top ethnic-border-bottom" style="position:relative;padding:7rem 2rem;background:var(--white);overflow:hidden;">
-  <div class="ethnic-motif" style="inset:0;"></div>
   <div style="position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(270deg,var(--gold-bg),transparent);opacity:.5;"></div>
 
   <div style="max-width:1200px;margin:0 auto;position:relative;">
@@ -471,10 +431,9 @@
             <div class="corner bl" style="bottom:10px;left:10px;"></div>
             <div class="corner br" style="bottom:10px;right:10px;"></div>
           </div>
-          <div style="aspect-ratio:4/5;background:linear-gradient(155deg,var(--claret),var(--claret-dark));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-            <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:350px;background-repeat:repeat;opacity:.08;"></div>
-            <img src="dedecorba-logolar/97.png" alt="Dede" style="height:180px;filter:brightness(0) invert(1);opacity:.15;position:relative;z-index:1;">
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(0deg,rgba(74,24,30,.95),transparent);z-index:2;">
+          <div style="aspect-ratio:4/5;position:relative;overflow:hidden;">
+            <img src="dedecorba-media/DSC02220.JPG" alt="Dede Çorba" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(0deg,rgba(74,24,30,.95),transparent 80%);z-index:2;">
               <div style="font-family:var(--font-display);font-size:1.4rem;color:var(--gold);font-style:italic;line-height:1.4;">"Lezzetin ölçüsü, doymak değil,<br>bırakmak istememektir."</div>
             </div>
           </div>
@@ -488,7 +447,7 @@
 
 <!-- ========== MENÜ (Açık krem arka plan) ========== -->
 <section id="menu" style="position:relative;padding:7rem 2rem;background:var(--cream);overflow:hidden;">
-  <div class="ethnic-motif" style="inset:0;opacity:.025;"></div>
+  <div style="position:absolute;top:0;right:0;width:30%;height:40%;opacity:.06;pointer-events:none;"><img src="dedecorba-media/DSC02182.JPG" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,190,125,.08) 0%,transparent 55%);"></div>
 
   <div style="max-width:1200px;margin:0 auto;position:relative;">
@@ -646,8 +605,8 @@
 
 <!-- ========== FRANCHISE BANNER (Bordo) ========== -->
 <section class="ethnic-border-top ethnic-border-bottom" style="position:relative;padding:5.5rem 2rem;overflow:hidden;background:var(--claret);">
-  <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:400px;background-repeat:repeat;opacity:.1;"></div>
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent,rgba(74,24,30,.4));"></div>
+  <div style="position:absolute;inset:0;"><img src="dedecorba-media/DSC02170.JPG" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.15;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(74,24,30,.7),rgba(74,24,30,.9));"></div>
   <div style="max-width:750px;margin:0 auto;text-align:center;position:relative;z-index:1;">
     <div class="rv" style="font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;">Franchise Fırsatı</div>
     <h2 class="rv rv-d1" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;line-height:1.2;margin-bottom:1.3rem;font-style:italic;color:var(--white);">
@@ -666,7 +625,6 @@
 
 <!-- ========== FRANCHISE (Beyaz) ========== -->
 <section id="franchise" class="ethnic-border-bottom" style="position:relative;padding:7rem 2rem;background:var(--white);overflow:hidden;">
-  <div class="ethnic-motif" style="inset:0;"></div>
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(239,190,125,.05) 0%,transparent 55%);"></div>
 
   <div style="max-width:1200px;margin:0 auto;position:relative;">
@@ -896,7 +854,6 @@
 
 <!-- ========== FOOTER (Bordo) ========== -->
 <footer class="ethnic-border-top" style="position:relative;background:var(--claret);overflow:hidden;">
-  <div style="position:absolute;inset:0;background-image:url('dedecorba-media/Dede Kurumsal Kimlik Kılavuzu.pdf.png');background-size:500px;background-repeat:repeat;opacity:.04;"></div>
   <div style="max-width:1200px;margin:0 auto;padding:3.5rem 2rem;position:relative;">
     <div class="footer-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;">
       <div>
