@@ -205,6 +205,7 @@
       bottom:4px;background:linear-gradient(90deg,transparent 20%,rgba(239,190,125,.2),transparent 80%);
     }
     @keyframes patternDrift{0%{background-position:0 0}100%{background-position:300px 0}}
+    @keyframes sliderScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* Small divider variant */
     .deco-divider-sm{
@@ -367,23 +368,45 @@
 </section>
 
 
-<!-- ========== ETHNIC DIVIDER ========== -->
-<div class="deco-divider">
-  <div class="deco-gold-bar top"></div>
-  <div class="deco-gold-bar top2"></div>
-  <div class="deco-inner">
-    <div class="deco-ornament">
-      <div class="deco-line"></div>
-      <div class="deco-center">
-        <div class="deco-diamond-sm"></div>
-        <div class="deco-diamond"></div>
-        <div class="deco-diamond-sm"></div>
-      </div>
-      <div class="deco-line"></div>
-    </div>
+<!-- ========== PHOTO SLIDER ========== -->
+<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:0;position:relative;">
+  <div class="slider-track" style="display:flex;width:max-content;animation:sliderScroll 40s linear infinite;">
+    <img src="dedecorba-media/slider-opt/DSC01745.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02066.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01625.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01803.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01838.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02101.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02089.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02172.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02177.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02014.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01897.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02220.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02208.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02195.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02182.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01689.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01771.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <!-- duplicate for seamless loop -->
+    <img src="dedecorba-media/slider-opt/DSC01745.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02066.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01625.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01803.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01838.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02101.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02089.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02172.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02177.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02014.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01897.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02220.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02208.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02195.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC02182.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01689.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
+    <img src="dedecorba-media/slider-opt/DSC01771.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
   </div>
-  <div class="deco-gold-bar bottom2"></div>
-  <div class="deco-gold-bar bottom"></div>
 </div>
 
 
