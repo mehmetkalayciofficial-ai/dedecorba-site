@@ -281,15 +281,18 @@
       .ham{display:flex}
       .desk-nav{display:none!important}
       .nav-inner{padding:1.2rem 1.5rem}
-      .grid-2{grid-template-columns:1fr!important}
+      .grid-2{grid-template-columns:1fr!important;gap:2rem!important}
       .hero-cats{gap:.5rem!important}
       .stats-grid{grid-template-columns:1fr 1fr!important}
       .footer-grid{grid-template-columns:1fr 1fr!important}
+      .photo-slider{padding:1rem 0!important}
+      .photo-slider img{height:160px!important;width:213px!important}
     }
     @media(max-width:480px){
       .hero-cats{gap:.4rem!important}
       .stats-grid{grid-template-columns:1fr!important}
       .footer-grid{grid-template-columns:1fr!important}
+      .photo-slider img{height:130px!important;width:173px!important}
     }
   </style>
 </head>
@@ -809,12 +812,12 @@
             <div style="font-size:.82rem;color:var(--gray-500);line-height:1.7;">7/24 Açık</div>
           </div>
         </div>
-        <div class="rv rv-d4" style="display:flex;gap:.8rem;margin-top:.5rem;">
-          <a href="https://instagram.com/dedecorbaofficial" target="_blank" rel="noopener" aria-label="Instagram" style="width:40px;height:40px;background:var(--claret);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .3s;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <div class="rv rv-d4" style="display:flex;gap:.6rem;margin-top:.8rem;">
+          <a href="https://instagram.com/dedecorbaofficial" target="_blank" rel="noopener" aria-label="Instagram" style="width:46px;height:46px;background:var(--claret);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .3s,transform .3s;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="https://www.facebook.com/dedecorba" target="_blank" rel="noopener" aria-label="Facebook" style="width:40px;height:40px;background:var(--claret);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .3s;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="https://www.facebook.com/dedecorba" target="_blank" rel="noopener" aria-label="Facebook" style="width:46px;height:46px;background:var(--claret);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .3s,transform .3s;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
         </div>
       </div>
@@ -904,10 +907,14 @@
       </div>
     </div>
     <div style="border-top:1px solid rgba(239,190,125,.15);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;">
-      <span style="font-size:.7rem;color:rgba(255,255,255,.3);">&copy; 2024 Dede. Tüm hakları saklıdır.</span>
-      <div style="display:flex;gap:1.25rem;">
-        <a href="#" class="footer-link" style="font-size:.7rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .3s;">Gizlilik Politikası</a>
-        <a href="#" class="footer-link" style="font-size:.7rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .3s;">Kullanım Koşulları</a>
+      <span style="font-size:.7rem;color:rgba(255,255,255,.3);">&copy; 2025 Dede. Tüm hakları saklıdır.</span>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <a href="https://instagram.com/dedecorbaofficial" target="_blank" rel="noopener" aria-label="Instagram" style="color:rgba(255,255,255,.4);transition:color .3s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/dedecorba" target="_blank" rel="noopener" aria-label="Facebook" style="color:rgba(255,255,255,.4);transition:color .3s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
       </div>
     </div>
   </div>
