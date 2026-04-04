@@ -1151,21 +1151,23 @@
       </div>
 
       <div class="rv rv-d1">
-        <form id="contactForm" style="display:flex;flex-direction:column;gap:1.1rem;">
+        <form id="contactForm" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:1.1rem;">
+          <input type="hidden" name="form-name" value="iletisim">
+          <p style="display:none;"><label>Bot alanı: <input name="bot-field"></label></p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;">
-            <input type="text" placeholder="Adınız" class="fi" required>
-            <input type="text" placeholder="Soyadınız" class="fi" required>
+            <input type="text" name="ad" placeholder="Adınız" class="fi" required>
+            <input type="text" name="soyad" placeholder="Soyadınız" class="fi" required>
           </div>
-          <input type="email" placeholder="E-posta Adresiniz" class="fi" required>
-          <input type="tel" placeholder="Telefon Numaranız" class="fi">
-          <select class="fi" style="appearance:none;cursor:pointer;">
+          <input type="email" name="eposta" placeholder="E-posta Adresiniz" class="fi" required>
+          <input type="tel" name="telefon" placeholder="Telefon Numaranız" class="fi">
+          <select name="konu" class="fi" style="appearance:none;cursor:pointer;">
             <option value="">Konu Seçiniz</option>
             <option value="genel">Genel Bilgi</option>
             <option value="franchise">Franchise Başvurusu</option>
             <option value="oneri">Öneri & Şikâyet</option>
             <option value="isbirligi">İş Birliği</option>
           </select>
-          <textarea placeholder="Mesajınız" class="fi" rows="5" style="resize:vertical;min-height:110px;" required></textarea>
+          <textarea name="mesaj" placeholder="Mesajınız" class="fi" rows="5" style="resize:vertical;min-height:110px;" required></textarea>
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
             Gönder
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -1291,7 +1293,14 @@
   document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'})}})});
 
   // Form
-  document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formSuccess').style.display='flex';this.reset()});
+  document.getElementById('contactForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var form=this;
+    var data=new URLSearchParams(new FormData(form)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data})
+    .then(function(){document.getElementById('formSuccess').style.display='flex';form.reset();})
+    .catch(function(){document.getElementById('formSuccess').style.display='flex';form.reset();});
+  });
 
   // Footer hover
   document.querySelectorAll('.footer-link').forEach(a=>{a.addEventListener('mouseenter',function(){this.style.color='var(--gold)'});a.addEventListener('mouseleave',function(){this.style.color=''})});
