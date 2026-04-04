@@ -369,37 +369,34 @@
 
 
 <!-- ========== PHOTO SLIDER ========== -->
-<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:1.2rem 0;position:relative;">
-  <div style="position:absolute;left:0;top:0;bottom:0;width:80px;z-index:2;background:linear-gradient(90deg,var(--claret-dark),transparent);pointer-events:none;"></div>
-  <div style="position:absolute;right:0;top:0;bottom:0;width:80px;z-index:2;background:linear-gradient(270deg,var(--claret-dark),transparent);pointer-events:none;"></div>
-  <div id="sliderTrack" style="display:flex;gap:10px;width:max-content;"></div>
+<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:1.5rem 0;position:relative;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(90deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(270deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
+  <div id="sliderTrack" style="display:flex;gap:10px;width:max-content;will-change:transform;"></div>
 </div>
 <script>
 (function(){
   var imgs=['DSC02089','DSC01745','DSC02177','DSC01625','DSC02208','DSC01838','DSC02014','DSC01689','DSC02172','DSC01803','DSC02220','DSC01897','DSC02066','DSC01771','DSC02101','DSC02195','DSC02182'];
+  var GAP=10,H=200,W=Math.round(H*4/3);
   var track=document.getElementById('sliderTrack');
   function addSet(){
     imgs.forEach(function(n){
       var img=document.createElement('img');
       img.src='dedecorba-media/slider-opt/'+n+'.jpg';
       img.alt='Dede Çorba';
-      img.style.cssText='height:200px;width:267px;object-fit:cover;border-radius:6px;flex-shrink:0;';
+      img.style.cssText='height:'+H+'px;width:'+W+'px;object-fit:cover;border-radius:6px;flex-shrink:0;';
       track.appendChild(img);
     });
   }
-  addSet();addSet();addSet();
-  var speed=.5,pos=0,setW=0;
-  function measure(){setW=track.children[0].offsetWidth*imgs.length+10*imgs.length;}
-  window.addEventListener('load',function(){
-    measure();
-    function tick(){
-      pos-=speed;
-      if(pos<=-setW) pos+=setW;
-      track.style.transform='translateX('+pos+'px)';
-      requestAnimationFrame(tick);
-    }
+  addSet();addSet();
+  var setW=(W+GAP)*imgs.length,pos=0,speed=0.5;
+  function tick(){
+    pos-=speed;
+    if(pos<=-setW) pos+=setW;
+    track.style.transform='translate3d('+pos+'px,0,0)';
     requestAnimationFrame(tick);
-  });
+  }
+  requestAnimationFrame(tick);
 })();
 </script>
 
