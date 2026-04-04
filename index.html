@@ -369,45 +369,39 @@
 
 
 <!-- ========== PHOTO SLIDER ========== -->
-<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:0;position:relative;">
-  <div class="slider-track" style="display:flex;width:max-content;animation:sliderScroll 40s linear infinite;">
-    <img src="dedecorba-media/slider-opt/DSC01745.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02066.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01625.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01803.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01838.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02101.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02089.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02172.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02177.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02014.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01897.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02220.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02208.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02195.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02182.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01689.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01771.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <!-- duplicate for seamless loop -->
-    <img src="dedecorba-media/slider-opt/DSC01745.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02066.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01625.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01803.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01838.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02101.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02089.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02172.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02177.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02014.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01897.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02220.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02208.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02195.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC02182.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01689.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-    <img src="dedecorba-media/slider-opt/DSC01771.jpg" alt="" style="height:220px;object-fit:cover;flex-shrink:0;">
-  </div>
+<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:1.2rem 0;position:relative;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:80px;z-index:2;background:linear-gradient(90deg,var(--claret-dark),transparent);pointer-events:none;"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:80px;z-index:2;background:linear-gradient(270deg,var(--claret-dark),transparent);pointer-events:none;"></div>
+  <div id="sliderTrack" style="display:flex;gap:10px;width:max-content;"></div>
 </div>
+<script>
+(function(){
+  var imgs=['DSC02089','DSC01745','DSC02177','DSC01625','DSC02208','DSC01838','DSC02014','DSC01689','DSC02172','DSC01803','DSC02220','DSC01897','DSC02066','DSC01771','DSC02101','DSC02195','DSC02182'];
+  var track=document.getElementById('sliderTrack');
+  function addSet(){
+    imgs.forEach(function(n){
+      var img=document.createElement('img');
+      img.src='dedecorba-media/slider-opt/'+n+'.jpg';
+      img.alt='Dede Çorba';
+      img.style.cssText='height:200px;width:267px;object-fit:cover;border-radius:6px;flex-shrink:0;';
+      track.appendChild(img);
+    });
+  }
+  addSet();addSet();addSet();
+  var speed=.5,pos=0,setW=0;
+  function measure(){setW=track.children[0].offsetWidth*imgs.length+10*imgs.length;}
+  window.addEventListener('load',function(){
+    measure();
+    function tick(){
+      pos-=speed;
+      if(pos<=-setW) pos+=setW;
+      track.style.transform='translateX('+pos+'px)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+})();
+</script>
 
 
 <!-- ========== HAKKIMIZDA (Beyaz) ========== -->
