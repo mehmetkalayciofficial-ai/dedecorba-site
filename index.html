@@ -332,7 +332,7 @@
 
 <!-- ========== HERO (Bordo arka plan) ========== -->
 <section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--claret-dark);">
-  <div style="position:absolute;inset:0;z-index:2;background:url('dedecorba-media/Dede%20Kurumsal%20Kimlik%20K%C4%B1lavuzu.pdf.png') repeat;background-size:cover;opacity:.10;animation:patternDrift 60s linear infinite;"></div>
+  <div style="position:absolute;inset:0;z-index:2;background:url('dedecorba-media/Dede%20Kurumsal%20Kimlik%20K%C4%B1lavuzu.pdf.png') repeat;background-size:cover;opacity:.10;animation:patternDrift 25s linear infinite;"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 20% 80%,rgba(239,190,125,.08) 0%,transparent 50%);"></div>
   <div style="position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 80% 20%,rgba(27,29,54,.15) 0%,transparent 50%);"></div>
   <div style="position:absolute;inset:0;z-index:4;background:linear-gradient(180deg,rgba(74,24,30,.2) 0%,transparent 25%,transparent 75%,rgba(74,24,30,.5) 100%);"></div>
@@ -376,10 +376,38 @@
 
 
 <!-- ========== PHOTO SLIDER ========== -->
-<div class="photo-slider" style="overflow:hidden;background:var(--claret-dark);padding:1.5rem 0;position:relative;">
-  <div style="position:absolute;left:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(90deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
-  <div style="position:absolute;right:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(270deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
-  <div id="sliderTrack" style="display:flex;gap:10px;width:max-content;will-change:transform;"></div>
+<div style="background:var(--claret-dark);position:relative;">
+  <!-- Top gold decoration -->
+  <div style="display:flex;align-items:center;justify-content:center;padding:.8rem 2rem;gap:1rem;">
+    <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));"></div>
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
+      <div style="width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.8;"></div>
+      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
+      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+    </div>
+    <div style="flex:1;height:1px;background:linear-gradient(270deg,transparent,var(--gold));"></div>
+  </div>
+
+  <div class="photo-slider" style="overflow:hidden;padding:.5rem 0;position:relative;">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(90deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:120px;z-index:2;background:linear-gradient(270deg,var(--claret-dark) 0%,transparent 100%);pointer-events:none;"></div>
+    <div id="sliderTrack" style="display:flex;gap:10px;width:max-content;will-change:transform;"></div>
+  </div>
+
+  <!-- Bottom gold decoration -->
+  <div style="display:flex;align-items:center;justify-content:center;padding:.8rem 2rem;gap:1rem;">
+    <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));"></div>
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
+      <div style="width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.8;"></div>
+      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
+      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+    </div>
+    <div style="flex:1;height:1px;background:linear-gradient(270deg,transparent,var(--gold));"></div>
+  </div>
 </div>
 <script>
 (function(){
