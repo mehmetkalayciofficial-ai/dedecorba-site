@@ -286,16 +286,16 @@
       .stats-grid{grid-template-columns:1fr 1fr!important}
       .footer-grid{grid-template-columns:1fr 1fr!important}
       .photo-slider{padding:1rem 0!important}
-      .photo-slider img{height:160px!important;width:213px!important}
+      .photo-slider .slider-img{height:160px!important;width:213px!important}
       .sube-grid{grid-template-columns:1fr!important;max-width:420px;margin:0 auto!important}
       .sube-contact-grid{grid-template-columns:1fr!important}
       .pazar-grid{grid-template-columns:1fr!important}
     }
     @media(max-width:480px){
       .hero-cats{gap:.4rem!important}
-      .stats-grid{grid-template-columns:1fr!important}
+      .stats-grid{grid-template-columns:1fr 1fr!important}
       .footer-grid{grid-template-columns:1fr!important}
-      .photo-slider img{height:130px!important;width:173px!important}
+      .photo-slider .slider-img{height:130px!important;width:173px!important}
     }
   </style>
 </head>
@@ -382,11 +382,11 @@
   <div style="display:flex;align-items:center;justify-content:center;padding:.8rem 2rem;gap:1rem;">
     <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));"></div>
     <div style="display:flex;align-items:center;gap:.6rem;">
-      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
-      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
-      <div style="width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.8;"></div>
-      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
-      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+      <div style="width:8px;height:8px;background:var(--gold);transform:rotate(45deg);opacity:.7;"></div>
+      <div style="width:60px;height:1px;background:var(--gold);opacity:.6;"></div>
+      <div style="width:12px;height:12px;border:1.5px solid var(--gold);transform:rotate(45deg);opacity:.9;"></div>
+      <div style="width:60px;height:1px;background:var(--gold);opacity:.6;"></div>
+      <div style="width:8px;height:8px;background:var(--gold);transform:rotate(45deg);opacity:.7;"></div>
     </div>
     <div style="flex:1;height:1px;background:linear-gradient(270deg,transparent,var(--gold));"></div>
   </div>
@@ -401,11 +401,11 @@
   <div style="display:flex;align-items:center;justify-content:center;padding:.8rem 2rem;gap:1rem;">
     <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));"></div>
     <div style="display:flex;align-items:center;gap:.6rem;">
-      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
-      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
-      <div style="width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.8;"></div>
-      <div style="width:40px;height:1px;background:var(--gold);opacity:.5;"></div>
-      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6;"></div>
+      <div style="width:8px;height:8px;background:var(--gold);transform:rotate(45deg);opacity:.7;"></div>
+      <div style="width:60px;height:1px;background:var(--gold);opacity:.6;"></div>
+      <div style="width:12px;height:12px;border:1.5px solid var(--gold);transform:rotate(45deg);opacity:.9;"></div>
+      <div style="width:60px;height:1px;background:var(--gold);opacity:.6;"></div>
+      <div style="width:8px;height:8px;background:var(--gold);transform:rotate(45deg);opacity:.7;"></div>
     </div>
     <div style="flex:1;height:1px;background:linear-gradient(270deg,transparent,var(--gold));"></div>
   </div>
@@ -413,26 +413,35 @@
 <script>
 (function(){
   var imgs=['DSC02089','DSC01745','DSC02177','DSC01625','DSC02208','DSC01838','DSC02014','DSC01689','DSC02172','DSC01803','DSC02220','DSC01897','DSC02066','DSC01771','DSC02101','DSC02195','DSC02182'];
-  var GAP=10,H=200,W=Math.round(H*4/3);
+  var GAP=10;
   var track=document.getElementById('sliderTrack');
   function addSet(){
     imgs.forEach(function(n){
       var img=document.createElement('img');
       img.src='dedecorba-media/slider-opt/'+n+'.jpg';
       img.alt='Dede Çorba';
-      img.style.cssText='height:'+H+'px;width:'+W+'px;object-fit:cover;border-radius:6px;flex-shrink:0;';
+      img.className='slider-img';
+      img.style.cssText='height:200px;width:267px;object-fit:cover;border-radius:6px;flex-shrink:0;';
       track.appendChild(img);
     });
   }
   addSet();addSet();
-  var setW=(W+GAP)*imgs.length,pos=0,speed=0.5;
+  var pos=0,speed=0.5,setW=0;
+  function measure(){
+    var first=track.children[0];
+    if(!first) return;
+    var realW=first.getBoundingClientRect().width;
+    setW=(realW+GAP)*imgs.length;
+  }
   function tick(){
+    if(!setW) measure();
     pos-=speed;
     if(pos<=-setW) pos+=setW;
     track.style.transform='translate3d('+pos+'px,0,0)';
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  window.addEventListener('load', function(){ measure(); requestAnimationFrame(tick); });
+  window.addEventListener('resize', function(){ measure(); });
 })();
 </script>
 
@@ -605,7 +614,7 @@
 
 <!-- ========== MENÜ (Açık krem arka plan) ========== -->
 <section id="menu" style="position:relative;padding:5rem 2rem;background:var(--cream);overflow:hidden;">
-  <div style="position:absolute;inset:0;opacity:.06;pointer-events:none;"><img src="dedecorba-media/DSC02182-opt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+  <div style="position:absolute;inset:0;opacity:.03;pointer-events:none;"><img src="dedecorba-media/DSC02182-opt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(.5);"></div>
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,190,125,.08) 0%,transparent 55%);"></div>
 
   <div style="max-width:1200px;margin:0 auto;position:relative;">
@@ -1048,6 +1057,15 @@
       <div style="display:flex;flex-direction:column;gap:1.8rem;">
         <div class="rv" style="display:flex;gap:1.1rem;align-items:start;">
           <div style="min-width:44px;height:44px;background:var(--claret);border-radius:2px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:.9rem;color:var(--black);margin-bottom:.15rem;">Genel Merkez</div>
+            <div style="font-size:.82rem;color:var(--gray-500);line-height:1.7;">Bostanlı, Karşıyaka<br>İzmir, Türkiye</div>
+          </div>
+        </div>
+        <div class="rv rv-d1" style="display:flex;gap:1.1rem;align-items:start;">
+          <div style="min-width:44px;height:44px;background:var(--claret);border-radius:2px;display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </div>
           <div>
@@ -1166,14 +1184,14 @@
     <div style="border-top:1px solid rgba(239,190,125,.15);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;">
       <span style="font-size:.7rem;color:rgba(255,255,255,.3);">&copy; 2025 Dede. Tüm hakları saklıdır.</span>
       <div style="display:flex;align-items:center;gap:1rem;">
-        <a href="https://instagram.com/dedecorbaofficial" target="_blank" rel="noopener" aria-label="Instagram" style="color:rgba(255,255,255,.4);transition:color .3s;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://instagram.com/dedecorbaofficial" target="_blank" rel="noopener" aria-label="Instagram" style="color:var(--gold);opacity:.7;transition:opacity .3s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
-        <a href="https://www.facebook.com/dedecorba" target="_blank" rel="noopener" aria-label="Facebook" style="color:rgba(255,255,255,.4);transition:color .3s;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <a href="https://www.facebook.com/dedecorba" target="_blank" rel="noopener" aria-label="Facebook" style="color:var(--gold);opacity:.7;transition:opacity .3s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://tr.linkedin.com/in/dede-corba-815b12392" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:rgba(255,255,255,.4);transition:color .3s;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://tr.linkedin.com/in/dede-corba-815b12392" target="_blank" rel="noopener" aria-label="LinkedIn" style="color:var(--gold);opacity:.7;transition:opacity .3s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
       </div>
     </div>
