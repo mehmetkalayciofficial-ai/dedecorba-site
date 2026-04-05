@@ -260,16 +260,39 @@
     .ham.active span:nth-child(2){opacity:0}
     .ham.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-    /* Mobile nav */
-    .mnav{
-      position:fixed;top:0;left:0;width:100%;height:100vh;
-      background:rgba(255,255,255,.98);backdrop-filter:blur(20px);z-index:150;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-      opacity:0;visibility:hidden;transition:opacity .4s cubic-bezier(.16,1,.3,1),visibility .4s;
+    /* Mobile nav overlay */
+    .mnav-overlay{
+      position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.4);z-index:140;
+      opacity:0;visibility:hidden;transition:opacity .3s;
     }
-    .mnav.open{opacity:1;visibility:visible}
-    .mnav a{font-family:var(--font-display);font-size:2rem;color:var(--claret);text-decoration:none;transition:color .3s,transform .3s}
-    .mnav a:hover{color:var(--gold-dark);transform:translateX(4px)}
+    .mnav-overlay.open{opacity:1;visibility:visible}
+
+    /* Mobile nav panel */
+    .mnav{
+      position:fixed;top:0;right:0;width:min(320px,80vw);height:100vh;
+      background:#fff;box-shadow:-4px 0 24px rgba(0,0,0,.1);z-index:150;
+      display:flex;flex-direction:column;padding:5rem 2.5rem 2.5rem;gap:0;
+      transform:translateX(100%);visibility:hidden;
+      transition:transform .35s cubic-bezier(.16,1,.3,1),visibility .35s;
+    }
+    .mnav.open{transform:translateX(0);visibility:visible}
+
+    /* Close button */
+    .mnav-close{
+      position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;
+      background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+      border-radius:50%;transition:background .2s;
+    }
+    .mnav-close:hover{background:rgba(98,33,40,.06)}
+    .mnav-close svg{width:20px;height:20px;stroke:var(--claret);stroke-width:2}
+
+    .mnav a{
+      font-family:var(--font-display);font-size:1.25rem;color:var(--gray-700);text-decoration:none;
+      padding:.85rem 0;border-bottom:1px solid rgba(98,33,40,.06);
+      transition:color .2s,padding-left .2s;
+    }
+    .mnav a:last-child{border-bottom:none}
+    .mnav a:hover{color:var(--claret);padding-left:.5rem}
 
     /* Section label */
     .sec-label{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
@@ -321,7 +344,11 @@
 </nav>
 
 <!-- Mobile Nav -->
+<div class="mnav-overlay" id="mnavOverlay" onclick="closeMenu()"></div>
 <div class="mnav" id="mnav">
+  <button class="mnav-close" onclick="closeMenu()" aria-label="Menüyü kapat">
+    <svg viewBox="0 0 24 24" fill="none"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
   <a href="#hero" onclick="closeMenu()">Ana Sayfa</a>
   <a href="#hakkimizda" onclick="closeMenu()">Hakkımızda</a>
   <a href="#subelerimiz" onclick="closeMenu()">Şubelerimiz</a>
@@ -1365,8 +1392,18 @@
   });
 
   // Mobile menu
-  function toggleMenu(){document.getElementById('mnav').classList.toggle('open');document.querySelector('.ham').classList.toggle('active');document.body.style.overflow=document.getElementById('mnav').classList.contains('open')?'hidden':''}
-  function closeMenu(){document.getElementById('mnav').classList.remove('open');document.querySelector('.ham').classList.remove('active');document.body.style.overflow=''}
+  function toggleMenu(){
+    const m=document.getElementById('mnav'),o=document.getElementById('mnavOverlay'),h=document.querySelector('.ham');
+    const opening=!m.classList.contains('open');
+    m.classList.toggle('open');o.classList.toggle('open');h.classList.toggle('active');
+    document.body.style.overflow=opening?'hidden':'';
+  }
+  function closeMenu(){
+    document.getElementById('mnav').classList.remove('open');
+    document.getElementById('mnavOverlay').classList.remove('open');
+    document.querySelector('.ham').classList.remove('active');
+    document.body.style.overflow='';
+  }
 
   // Particles
   (function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.top=(50+Math.random()*50)+'%';p.style.animationDelay=Math.random()*6+'s';p.style.animationDuration=(4+Math.random()*4)+'s';c.appendChild(p)}})();
