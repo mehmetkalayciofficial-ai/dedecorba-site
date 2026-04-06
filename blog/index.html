@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4H9GTG4QS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V4H9GTG4QS');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#4A181E">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png">
+  <title>Blog — Dede Çorba | Lezzet Yazıları & Tarifler</title>
+  <meta name="description" content="Dede Çorba blog — İşkembe çorbası, mercimek çorbası, beyran, ezogelin ve daha fazlası. İzmir'in en lezzetli çorba yazıları burada.">
+  <meta name="keywords" content="çorba blog, çorba tarifleri, izmir çorbacı, dede çorba blog, türk çorbaları">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://dedecorba.com.tr/blog/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dede Çorba">
+  <meta property="og:title" content="Blog — Dede Çorba">
+  <meta property="og:description" content="İzmir'in en lezzetli çorba yazıları. Geleneksel tarifler ve lezzet hikayeleri.">
+  <meta property="og:url" content="https://dedecorba.com.tr/blog/">
+  <meta property="og:image" content="https://dedecorba.com.tr/dedecorba-logolar/98.png">
+  <meta property="og:locale" content="tr_TR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --claret:#622128;--claret-dark:#4A181E;--claret-light:#7A2D35;
+      --gold:#EFBE7D;--gold-light:#F5D4A0;--gold-dark:#D4A054;--gold-bg:#FDF6EC;
+      --black:#1A1A1A;--white:#FFFFFF;--cream:#F8F5F0;
+      --gray-100:#F5F4F2;--gray-200:#E8E6E3;--gray-300:#D1CFC9;
+      --gray-400:#9E9B95;--gray-500:#6B6860;--gray-600:#4A4843;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'DM Sans',Helvetica,Arial,sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);background:var(--cream);color:var(--black);-webkit-font-smoothing:antialiased}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--white)}
+    ::-webkit-scrollbar-thumb{background:var(--claret);border-radius:3px}
+
+    /* Nav */
+    .blog-nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(98,33,40,.08)}
+    .nav-inner{max-width:1400px;margin:0 auto;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-link{font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-500);text-decoration:none;position:relative;transition:color .3s}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--claret);transition:width .3s cubic-bezier(.16,1,.3,1)}
+    .nav-link:hover{color:var(--claret)}
+    .nav-link:hover::after{width:100%}
+    .nav-link.active{color:var(--claret);font-weight:600}
+    .nav-link.active::after{width:100%}
+    .desk-nav{display:flex;align-items:center;gap:2.5rem}
+
+    /* Hamburger */
+    .ham{background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;z-index:200}
+    .ham span{display:block;width:22px;height:1.5px;background:var(--claret);transition:transform .3s,opacity .3s}
+    .ham.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .ham.active span:nth-child(2){opacity:0}
+    .ham.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+    /* Mobile nav */
+    .mnav-overlay{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.4);z-index:140;opacity:0;visibility:hidden;transition:opacity .3s}
+    .mnav-overlay.open{opacity:1;visibility:visible}
+    .mnav{position:fixed;top:0;right:0;width:min(320px,80vw);height:100vh;background:#fff;box-shadow:-4px 0 24px rgba(0,0,0,.1);z-index:150;display:flex;flex-direction:column;padding:5rem 2.5rem 2.5rem;gap:0;transform:translateX(100%);visibility:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),visibility .35s}
+    .mnav.open{transform:translateX(0);visibility:visible}
+    .mnav-close{position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s}
+    .mnav-close:hover{background:rgba(98,33,40,.06)}
+    .mnav-close svg{width:20px;height:20px;stroke:var(--claret);stroke-width:2}
+    .mnav a{font-family:var(--font-display);font-size:1.25rem;color:var(--gray-600);text-decoration:none;padding:.85rem 0;border-bottom:1px solid rgba(98,33,40,.06);transition:color .2s,padding-left .2s}
+    .mnav a:last-child{border-bottom:none}
+    .mnav a:hover{color:var(--claret);padding-left:.5rem}
+
+    /* Hero */
+    .blog-hero{padding:8rem 2rem 3rem;text-align:center;background:var(--claret-dark);position:relative;overflow:hidden}
+    .blog-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,190,125,.1),transparent 70%)}
+    .blog-hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.5rem);color:var(--white);font-weight:400;margin-bottom:.8rem;position:relative}
+    .blog-hero p{font-size:.9rem;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto;position:relative;line-height:1.7}
+
+    /* Blog grid */
+    .blog-section{max-width:1100px;margin:0 auto;padding:3.5rem 2rem 5rem}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.8rem}
+
+    /* Blog card */
+    .blog-card{background:var(--white);border-radius:6px;overflow:hidden;border:1px solid var(--gray-200);transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+    .blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(98,33,40,.08)}
+    .blog-card-img{aspect-ratio:16/10;background:var(--claret);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .blog-card-icon{width:48px;height:48px;opacity:.25}
+    .blog-card-tag{position:absolute;top:.8rem;left:.8rem;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;background:var(--gold);color:var(--claret-dark);padding:.3rem .7rem;border-radius:2px;font-weight:600}
+    .blog-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+    .blog-card-body h2{font-family:var(--font-display);font-size:1.35rem;color:var(--claret);font-weight:600;margin-bottom:.6rem;line-height:1.3}
+    .blog-card-body p{font-size:.82rem;color:var(--gray-500);line-height:1.7;margin-bottom:1rem;flex:1}
+    .blog-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.8rem;border-top:1px solid var(--gray-100)}
+    .blog-card-date{font-size:.7rem;color:var(--gray-400);letter-spacing:.05em}
+    .blog-card-read{font-size:.7rem;color:var(--claret);font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.3rem}
+    .blog-card-read svg{width:14px;height:14px;transition:transform .3s}
+    .blog-card:hover .blog-card-read svg{transform:translateX(3px)}
+
+    /* Footer */
+    .blog-footer{background:var(--claret-dark);padding:2.5rem;text-align:center}
+    .blog-footer p{font-size:.75rem;color:rgba(255,255,255,.4)}
+    .blog-footer a{color:var(--gold);text-decoration:none}
+
+    @media(max-width:768px){
+      .ham{display:flex}
+      .desk-nav{display:none!important}
+      .nav-inner{padding:1.2rem 1.5rem}
+      .blog-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="blog-nav">
+  <div class="nav-inner">
+    <a href="../">
+      <img src="../dedecorba-logolar/98.png" alt="Dede Çorba" style="height:34px;">
+    </a>
+    <div class="desk-nav">
+      <a href="../#hakkimizda" class="nav-link">Hakkımızda</a>
+      <a href="../#subelerimiz" class="nav-link">Şubelerimiz</a>
+      <a href="../#menu" class="nav-link">Menü</a>
+      <a href="../#franchise" class="nav-link">Franchise</a>
+      <a href="./" class="nav-link active">Blog</a>
+      <a href="../#iletisim" class="nav-link">İletişim</a>
+    </div>
+    <button class="ham" onclick="toggleMenu()" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mnav-overlay" id="mnavOverlay" onclick="closeMenu()"></div>
+<div class="mnav" id="mnav">
+  <button class="mnav-close" onclick="closeMenu()" aria-label="Menüyü kapat">
+    <svg viewBox="0 0 24 24" fill="none"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <a href="../">Ana Sayfa</a>
+  <a href="../#hakkimizda" onclick="closeMenu()">Hakkımızda</a>
+  <a href="../#subelerimiz" onclick="closeMenu()">Şubelerimiz</a>
+  <a href="../#menu" onclick="closeMenu()">Menü</a>
+  <a href="../#franchise" onclick="closeMenu()">Franchise</a>
+  <a href="./">Blog</a>
+  <a href="../#iletisim" onclick="closeMenu()">İletişim</a>
+</div>
+
+<!-- Hero -->
+<section class="blog-hero">
+  <h1>Lezzet Yazıları</h1>
+  <p>Geleneksel tatlardan modern sofralara, çorba kültürü ve lezzet hikayeleri.</p>
+</section>
+
+<!-- Blog Grid -->
+<section class="blog-section">
+  <div class="blog-grid">
+
+    <a href="iskembe-corbasi" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>İşkembe Çorbası — Şifa Kaynağı Lezzet</h2>
+        <p>Bağışıklık güçlendiren yapısıyla özellikle kış aylarının vazgeçilmezi. Günlük taze hazırlanan işkembe çorbası, doğal sarımsak ve sirke ile servis edilir.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="mercimek-corbasi" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Mercimek Çorbası — Klasik Ama Vazgeçilmez</h2>
+        <p>Hem doyurucu hem de sağlıklı yapısıyla herkesin favorisi. Özel tarifle hazırlanan mercimek çorbası, tereyağı ve baharatlarla lezzetlendirilir.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="beyran-corbasi" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Beyran Çorbası — Gaziantep'ten İzmir'e</h2>
+        <p>Acılı ve doyurucu yapısıyla özellikle sabah saatlerinde tercih edilen beyran çorbası, et suyu ve pirinç ile sunulur.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="ezogelin-corbasi" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Ezogelin Çorbası — Anadolu'nun Efsanesi</h2>
+        <p>Baharatlı ve aromatik tadıyla sofraların yıldızı. Geleneksel tarifle hazırlanan ezogelin çorbası, sıcak ve taze servis edilir.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="kelle-paca-corbasi" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Kelle Paça Çorbası — Güç ve Enerji Deposu</h2>
+        <p>Yoğun kolajen içeriğiyle vücut direncini artırır. Uzun saatler kaynatılarak hazırlanan kelle paça çorbası, gerçek lezzetiyle sunulur.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="ayak-paca" class="blog-card">
+      <div class="blog-card-img">
+        <span class="blog-card-tag">Çorba</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Ayak Paça — Şifa Deposu Geleneksel Tat</h2>
+        <p>Özellikle hastalık dönemlerinde tercih edilen şifa deposu. Hijyenik ve özenli şekilde hazırlanır.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="lahmacun" class="blog-card">
+      <div class="blog-card-img" style="background:var(--claret-light);">
+        <span class="blog-card-tag">Fırın</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Lahmacun — Taş Fırından Efsane Lezzet</h2>
+        <p>İnce hamuru ve bol malzemesiyle herkesin favorisi. Taş fırında hazırlanan lahmacun, çıtır ve lezzetlidir.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="tandir" class="blog-card">
+      <div class="blog-card-img" style="background:var(--claret-light);">
+        <span class="blog-card-tag">Et</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Tandır — Ağır Ateşte Eşsiz Lezzet</h2>
+        <p>Uzun sürede pişirilerek yumuşacık hale gelen özel bir et yemeği. Damakta unutulmaz bir tat bırakır.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="tandir-pilav" class="blog-card">
+      <div class="blog-card-img" style="background:var(--claret-light);">
+        <span class="blog-card-tag">Et</span>
+        <svg class="blog-card-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+      </div>
+      <div class="blog-card-body">
+        <h2>Tandır Pilav — Doyurucu ve Lezzetli</h2>
+        <p>Et ve pilavın mükemmel birleşimi. Özel sunumla servis edilen tandır pilav, hem doyurucu hem lezzetlidir.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">Nisan 2026</span>
+          <span class="blog-card-read">Devamını Oku <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="blog-footer">
+  <p>&copy; 2026 <a href="../">Dede Çorba</a> — Bir Kaşık Daha</p>
+</footer>
+
+<script>
+  function toggleMenu(){
+    const m=document.getElementById('mnav'),o=document.getElementById('mnavOverlay'),h=document.querySelector('.ham');
+    const opening=!m.classList.contains('open');
+    m.classList.toggle('open');o.classList.toggle('open');h.classList.toggle('active');
+    document.body.style.overflow=opening?'hidden':'';
+  }
+  function closeMenu(){
+    document.getElementById('mnav').classList.remove('open');
+    document.getElementById('mnavOverlay').classList.remove('open');
+    document.querySelector('.ham').classList.remove('active');
+    document.body.style.overflow='';
+  }
+</script>
+</body>
+</html>
